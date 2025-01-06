@@ -1,8 +1,5 @@
 const router = require('express').Router();
 const teamController = require('../controllers/teamController');
-//const queryBuilder = require('../controllers/queryBuilder');
-//const Team = require('../models/Team');
-//const teamQueryBuilder = new queryBuilder('EQUIPO');
 router.get('/', teamController.getAllTeams);
 router.get('/:teamId', teamController.getTeamById);
 router.patch('/:teamId', teamController.updateTeam);
