@@ -11,7 +11,7 @@ router.get('/', (req, res) =>{
 });
 //Route Middlewares
 router.use('/team', teamRoute);
-router.use('/players', playerRoute);
+router.use('/player', playerRoute);
 router.use('/games', gameRoute);
 
 module.exports = router;

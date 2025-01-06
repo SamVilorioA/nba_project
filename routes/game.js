@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const controller = require('../controllers/queryBuilder');
+const controller = require('../controllers/query_Builder');
 const Team = require('../models/Game');
 
 router.get('/', async(resp, req) =>{
