@@ -3,10 +3,14 @@ class dbQueries {
         this.table = table;
     }
     select(campos = '*', condiciones = null){
-        console.log(campos);
         if(!condiciones)
             return `SELECT ${campos} FROM ${this.table}`
         return `SELECT ${campos} FROM ${this.table} WHERE ${condiciones}`;
+    }
+    selectWithJoin(campos ='*', condiciones = null, join=null){
+        if(!join) return `SELECT * FROM ${this.table}`;
+        if(!condiciones) return `SELECT * FROM ${this.table} JOIN ${join}`;
+        return `SELECT ${campos} FROM ${this.table} JOIN ${join} WHERE ${condiciones}`;
     }
     update(campos = null, filtro = null){
         if(!campos) return null;

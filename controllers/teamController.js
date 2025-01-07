@@ -19,10 +19,14 @@ const teamController ={
             res.status(200).json(results);
         });
     },
+    getTeamsByConference: (req, res) => {
+        
+    },
+    getTeamsByDivision: (req, res) => {},
     updateTeam: (req, res) => {
         const campos = setCampos(req.body); 
         if(!campos) res.status(400).json({Error: 'Solicitud no procesada por falta de informacion.'});
-        let condicion = setFiltros(req.params);
+        let condicion = setFiltros('EQUIPO_ID', 'teamId', req.params);
         TeamModel.updateTeam(campos, condicion, (err, results) => {
             if(err) return res.status(500).json({error: err.message});
             if(results.length < 1) res.status(404).json({Error: 'No se encontraron registros!'});
@@ -48,9 +52,10 @@ function setCampos(requestBody = null){
     
     return `${nombre}, ${ciudad}, ${campeonatos}, FECHA_ACTUALIZACION = NOW()`;
 }
-function setFiltros(requestBody = null){
+function setFiltros(campo = 'EQUIPO_ID', propiedad = null ,requestBody = null){
+    if(!propiedad) return null;
     if(!requestBody) return null;
-    const filtro = requestBody.teamId ? `EQUIPO_ID = ${requestBody.teamId}` : null;
+    const filtro = requestBody.teamId ? `${campo} = ${requestBody[propiedad]}` : null;
     return filtro;
 }
 module.exports = teamController;
